@@ -10,7 +10,7 @@ const session = require('express-session');
 
 const methodOverride = require('method-override');
 const mongoSanitize = require('express-mongo-sanitize');
-const productRoutes = require('./routes/productRoutes');
+// const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.use(express.json());
 // app.use(session(sessionConfig));
 
 // Mount Routes
-app.use('/products', productRoutes);
+// app.use('/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.render('home');
