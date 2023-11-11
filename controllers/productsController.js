@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const fns = require('date-fns');
 const User = require('../models/user');
 const { ObjectId } = require('mongoose').Types;
 const path = require('path');
@@ -8,7 +9,7 @@ module.exports.index = async (req, res) => {
   try {
     const ITEMS_PER_PAGE = 10; // Number of items to display per page
     const { page, limit, deviceStatus, deviceType, maxDistance, userlongitude, userlatitude } = req.query;
-    console.log('deviceType', deviceType);
+    // console.log('deviceType', deviceType);
     // Validate and sanitize input parameters
     const currentPage = parseInt(page) || 1;
     const limitPerPage = parseInt(limit) || ITEMS_PER_PAGE;
@@ -75,7 +76,7 @@ module.exports.createProduct = async (req, res, next) => {
       deviceType: req.body.product.deviceType,
       description: req.body.product.description,
     };
-    console.log(unprocessedBody);
+    // console.log(unprocessedBody);
 
     const product = new Product(unprocessedBody);
 
@@ -110,8 +111,14 @@ module.exports.showProduct = async (req, res) => {
       return res.redirect('/products');
     }
 
+    // Format the creation
+    const createDateInWords = fns.formatDistanceToNow(new Date(product.createdAt), {
+      addSuffix: true,
+    });
+
     res.render('products/show', {
       product,
+      createDateInWords,
     });
   } catch (error) {
     console.error('Error retrieving device:', error);

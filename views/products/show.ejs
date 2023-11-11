@@ -1,14 +1,12 @@
 <% layout('layouts/boilerplate')%>
-<h1>This is your product</h1>
-<div class="row d-flex flex-md-wrap">
+
+<div class="row">
   <section class="col-md-12 order-3 order-sm-3 order-md-1 mb-4">
     <div id="map" class="map" style="width: 100%; height: 400px"></div>
   </section>
-  <section class="col-md-6 order-1 order-md-2" style="margin: 0 auto;">
+  <section class="col-md-6 order-1 order-md-2" style="margin: 0 auto">
     <!-- START UPPER CARD HEADER -->
-    <div class="p-3 card d-flex flex-row justify-content-between" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; text-align: center; font-weight: bold;">
-      <%= product.deviceType %>
-    </div>
+    <div class="p-3 card d-flex flex-row justify-content-between text-uppercase" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; text-align: center; font-weight: bold"><%= product.deviceType %></div>
     <!-- END UPPER CARD HEADER -->
     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -40,20 +38,9 @@
     <div class="col-md-12">
       <div class="card mb-3" style="border-radius: 0">
         <div class="card-body py-0">
-          <div class="header">
-            <p>
-            <% if (currentUser && product.author && currentUser._id && product.author.equals(currentUser._id)) { %>
-
-            <form class="d-inline" action="/products/<%=product.id%>?_method=DELETE" method="POST">
-              <button class="dropdown-item text-danger dropdown-item-danger d-flex gap-2 align-items-center"><i class="bi bi-trash3"></i> Remove</button>
-            </form>
-          </p>
-            <% } %>
-          </div>
-
           <ul class="list-group list-group-flush show-product-list">
             <li class="list-group-item"><i class="bi bi-question-diamond"></i> <b>Device Status: </b> <span id="product-status"> <%= product.deviceStatus %></span></li>
-            <li class="list-group-item"><i class="bi bi-diamond-half"></i> <b>Device Type</b><span id="product-species"> <%= product.deviceType %></span></li>
+            <li class="list-group-item"><i class="bi bi-pc-display-horizontal"></i> <b>Device Type: </b><span id="product-type"> <%= product.deviceType %></span></li>
 
             <li class="list-group-item d-none"><b>Lat: </b><span class="product-latitude"><%=product.latitude%></span><b>Lng: </b><span class="product-longitude"><%=product.longitude%></span></li>
 
@@ -63,17 +50,28 @@
                 <span id="product-description"> <%= product.description %></span>
               </p>
             </li>
+            <li class="list-group-item">
+              <i class="bi bi-envelope-fill"></i> <b><a href="mailto:<%= product.author.email %>">Contact Owner</a></b>
+            </li>
           </ul>
         </div>
         <div class="d-flex flex-column">
-          <!-- <div class="card-footer small text-muted">data added <=createDateInWords%></div>
-          <div class="card-footer small text-muted">updated <=updateDateInWords%></div> -->
+          <div class="card-footer small text-muted d-flex justify-content-between py-3">
+            Added <%=createDateInWords%> <% if (currentUser && product.author && currentUser._id && product.author.equals(currentUser._id)) { %>
+
+            <form class="d-inline" action="/products/<%=product.id%>?_method=DELETE" method="POST">
+              <button class="dropdown-item text-danger dropdown-item-danger d-flex gap-2 align-items-center"><i class="bi bi-trash3"></i> Remove</button>
+            </form>
+
+            <% } %>
+          </div>
+
+          <!-- <div class=""></div> -->
         </div>
       </div>
     </div>
   </section>
 </div>
-
 
 <script>
   const TOMTOMTOKEN = '<%-process.env.TOMTOM_API_KEY%>';
