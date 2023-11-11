@@ -296,6 +296,38 @@
   <% } %>
 </div>
 
+<!-- TOP PAGINATION ON MAP-->
+<p class="d-none current-page"><%= currentPage %></p>
+<div class="col-md-12">
+  <nav class="mt-5" aria-label="Page navigation">
+    <ul class="d-flex justify-content-center" style="padding: 0">
+      <div class="custom-page-link prev" style="width: 120px;text-align: center; ">
+        <a
+         
+          class="btn btn-primary  px-3 custom-page-link <%= currentPage <= 1 ? 'disabled' : '' %>"
+          href="/products?page=<%= currentPage - 1  %>&limit=<%= limitPerPage %>"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true"><i class="bi bi-arrow-left"></i><span id="d-none d-sm-inline-block"></span>
+        </a>
+      </div>
+
+      <div class=" custom-page-link next "  style="width: 120px; text-align: center;">
+        <a
+        
+          class="btn btn-primary px-3 custom-page-link <%= currentPage >= totalPages ? 'disabled' : '' %>"
+          href="/products?page=<%= currentPage < totalPages ? currentPage + 1 : currentPage  %>&limit=<%= limitPerPage %>"
+          aria-label="Next"
+        >
+          <span id="d-none d-sm-inline-block"></span
+          ><span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+        </a>
+      </div>
+    </ul>
+  </nav>
+</div>
+
+
 <script>
   if ('geolocation' in navigator) {
     let userLatitude = document.querySelector('#user-latitude');
@@ -358,6 +390,92 @@
     }
   });
 </script>
+
+
+<script>
+
+  // Get the filter form element
+  let filterForm = document.getElementById('filterForm');
+
+  // Add an event listener to the form's submit event
+  filterForm.addEventListener('submit', function(e) {
+    // Get the selected filter values
+    var deviceStatus = document.querySelector('#deviceStatus').value;
+    var deviceType = document.querySelector('#deviceType').value;
+    var distance = document.querySelector('#distance').value;
+  
+    // Save the filter values to the local storage
+    localStorage.setItem('deviceStatus', deviceStatus);
+    localStorage.setItem('deviceType', deviceType);
+    localStorage.setItem('distance', distance);
+
+  });
+
+
+
+// Function to retrieve filter values from local storage
+function retrieveFilterValues() {
+  // Set the saved filter values from the local storage
+  document.querySelector('#deviceStatus').value = localStorage.getItem('deviceStatus') || '';
+  document.querySelector('#deviceType').value = localStorage.getItem('deviceType') || '';
+  document.querySelector('#distance').value = localStorage.getItem('distance') || '';
+
+}
+
+let resetFormBtn = document.querySelector(".reset-form-btn")
+
+
+// Function to clear the form filter values
+function clearFormFilterValues() {
+    document.querySelector('#deviceStatus').value = '';
+    document.querySelector('#deviceType').value = '';
+    document.querySelector('#distance').value = '';
+
+}
+
+
+// Event listener for the reset button
+resetFormBtn.addEventListener("click", (e) => {
+ // e.preventDefault();
+  clearFormFilterValues();
+});
+
+const nextBtn = document.querySelector('.next')
+const prevBtn = document.querySelector('.prev')
+let currentPage = document.querySelector('.current-page').innerText
+
+
+
+
+// Previous button event listener
+prevBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  navigateToPage(Number(currentPage) - 1);
+});
+
+// Next button event listener
+nextBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  navigateToPage(Number(currentPage) + 1);
+});
+
+// Function to handle pagination
+function navigateToPage(pageNumber) {
+  // Perform logic to navigate to the specified page
+  const limitPerPage = 10; // Replace with your limit per page value
+  const url = `/products?page=${pageNumber}&limit=${limitPerPage}`;
+  
+  // Perform additional logic if needed, such as making an API request or updating the UI
+  window.location.href = url; // Navigate to the specified page
+}
+
+
+
+ // On page load, retrieve filter values
+ window.addEventListener("load", retrieveFilterValues);
+
+</script>
+
 
 <script>
   const TOMTOMTOKEN = "<%-process.env.TOMTOM_API_KEY%>";
