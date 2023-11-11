@@ -1,11 +1,24 @@
 <% layout('layouts/boilerplate')%>
+<style>
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(2deg);
+    }
+  }
 
+  .rotate-animation {
+    animation: rotate 1s infinite alternate; /* Rotates back and forth */
+  }
+</style>
 <div>
   <h1 class="text-center" style="color: darkgreen; font-size: 4rem">Eco Drop</h1>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center py-3">
+    <div class="col-md-12 text-center py-3 rotate-animation">
       <img src="/images/icons/battery.jpg" alt="battery" class="mx-auto d-block img-fluid" />
     </div>
   </div>

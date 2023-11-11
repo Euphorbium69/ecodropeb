@@ -1,9 +1,10 @@
 const Product = require('../models/product');
-const { cloudinary } = require('../cloudinary');
+// const { cloudinary } = require('../cloudinary');
 const User = require('../models/user');
 const { ObjectId } = require('mongoose').Types;
 const path = require('path');
 
+// show all products
 module.exports.index = async (req, res) => {
   try {
     const ITEMS_PER_PAGE = 10; // Number of items to display per page
@@ -104,6 +105,7 @@ module.exports.createProduct = async (req, res, next) => {
   }
 };
 
+// Show product
 module.exports.showProduct = async (req, res) => {
   try {
     const productId = req.params.id;
@@ -123,4 +125,12 @@ module.exports.showProduct = async (req, res) => {
     console.error('Error retrieving device:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
+};
+// Delete product
+module.exports.deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  await Product.findByIdAndDelete(id);
+  // req.flash('success', 'Successfully deleted product');
+  res.status(200).redirect('/products');
 };

@@ -17,7 +17,7 @@
 
         <% }) %> <% } else { %>
         <div class="carousel-item active">
-          <img src="/images/placeholder.jpg" class="d-block w-100" alt="" />
+          <img src="/images/battery.jpg" class="d-block w-100" alt="" />
         </div>
         <% } %>
       </div>
@@ -38,6 +38,17 @@
     <div class="col-md-12">
       <div class="card mb-3" style="border-radius: 0">
         <div class="card-body py-0">
+          <div class="header">
+            <p>
+            <% if (currentUser && product.author && currentUser._id && product.author.equals(currentUser._id)) { %>
+
+            <form class="d-inline" action="/products/<%=product.id%>?_method=DELETE" method="POST">
+              <button class="dropdown-item text-danger dropdown-item-danger d-flex gap-2 align-items-center"><i class="bi bi-trash3"></i> Remove</button>
+            </form>
+          </p>
+            <% } %>
+          </div>
+
           <ul class="list-group list-group-flush show-product-list">
             <li class="list-group-item"><i class="bi bi-question-diamond"></i> <b>Device Status: </b> <span id="product-status"> <%= product.deviceStatus %></span></li>
             <li class="list-group-item"><i class="bi bi-diamond-half"></i> <b>Device Type</b><span id="product-species"> <%= product.deviceType %></span></li>
@@ -60,6 +71,8 @@
     </div>
   </section>
 </div>
+
+
 <script>
   const TOMTOMTOKEN = '<%-process.env.TOMTOM_API_KEY%>';
   const product = {features: <%-JSON.stringify(product)%>}
