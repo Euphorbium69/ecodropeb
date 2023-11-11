@@ -6,10 +6,54 @@ const path = require('path');
 
 module.exports.index = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const ITEMS_PER_PAGE = 10; // Number of items to display per page
+    const { page, limit, deviceStatus, deviceType, maxDistance, userlongitude, userlatitude } = req.query;
+    console.log('deviceType', deviceType);
+    // Validate and sanitize input parameters
+    const currentPage = parseInt(page) || 1;
+    const limitPerPage = parseInt(limit) || ITEMS_PER_PAGE;
 
-    // const producttext = 'hello its products';
-    res.render('products/index', { products });
+    // Define filter options for the search query
+    const filterOptions = {};
+
+    if (deviceStatus) {
+      filterOptions.deviceStatus = { $regex: new RegExp(deviceStatus, 'i') };
+    }
+
+    if (deviceType) {
+      filterOptions.deviceType = { $regex: new RegExp(deviceType, 'i') };
+    }
+
+    //console.log(userlongitude, userlatitude, maxDistance);
+
+    if (userlatitude && userlongitude && maxDistance) {
+      // Convert maxDistance to radians
+      const maxDistanceRadians = maxDistance / 6371;
+
+      filterOptions.location = {
+        $geoWithin: {
+          $centerSphere: [[userlongitude, userlatitude], maxDistanceRadians],
+        },
+      };
+    }
+
+    // Retrieve total number of products for pagination logic
+    const totalProducts = await Product.countDocuments(filterOptions);
+
+    // Calculate starting index based on current page and limit
+    const startIndex = (currentPage - 1) * limitPerPage;
+
+    // Retrieve products for current page with applied filter options
+    const products = await Product.find(filterOptions).skip(startIndex).limit(limitPerPage);
+
+    // Calculate total number of pages based on total products and limit per page
+    const totalPages = Math.ceil(totalProducts / limitPerPage);
+    // Render response with pagination data
+
+    /////////////////////////////////////
+    ////////////////////////////////////////
+    //const products = await Product.find({});
+    res.render('products/index', { products, currentPage, limitPerPage, totalProducts, totalPages, startIndex, deviceStatus, deviceType });
   } catch (err) {
     console.error(err.message);
   }
