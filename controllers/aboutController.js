@@ -1,7 +1,7 @@
 module.exports.index = async (req, res) => {
   try {
-    const abouttext = 'hello its about';
-    res.render('about/index', { abouttext });
+    const aboutPage = 'About Page';
+    res.render('about/index', { aboutPage });
   } catch (err) {
     console.error(err.message);
   }

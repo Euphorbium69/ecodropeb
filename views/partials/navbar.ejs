@@ -1,4 +1,18 @@
 <!-- <- include('./iconsSVG') %> -->
+<style>
+  .user-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #1D9292;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+</style>
 
 <header class="sticky-top text-body">
   <div class="container">
@@ -7,15 +21,23 @@
         <% if (!currentUser) { %>
 
         <!-- Define the behavior when user is not logged in -->
-        <button type="button" onclick="location.href='/auth/login'" class="btn btn-sm btn-outline-light me-2">Log in</button>
+        <button type="button" onclick="location.href='/auth/login'" class="btn btn-sm btn-light me-2">Log in</button>
         <button type="button" onclick="location.href='/auth/register'" class="btn btn-sm btn-warning">Sign up</button>
         <% } else { %>
 
         <!-- Define the behavior when user is logged in -->
-        <p class="my-0 mx-3 d-flex text-white" style="text-transform: capitalize">Hello, <%= currentUser.firstName %>!</p>
-        <a href="/auth/logout" class="me-2 mb-md-0 text-decoration-none lh-1 d-flex align-items-center text-white">
-          <i class="bi bi-box-arrow-right"></i>
-        </a>
+        <p class="my-0 mx-3 d-flex text-white" style="text-transform: capitalize">
+          <div class="d-inline-flex align-items-center">
+          <div class="user-circle me-3">
+            <%= currentUser.username ? currentUser.username.charAt(0).toUpperCase() : '' %>
+          </div>
+        
+        </div></p>
+        <div class="d-inline-flex align-items-center">
+          <a href="/auth/logout" class="me-2 mb-md-0 text-decoration-none d-flex align-items-center text-white">
+            <span class="d-inline-block mr-1">Logout</span> <i class="bi bi-caret-right-fill"></i>
+          </a>
+        </div>
         <% } %>
       </div>
 
