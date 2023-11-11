@@ -1,0 +1,61 @@
+<% layout('layouts/boilerplate')%>
+
+<div>
+  <h1>Products page</h1>
+</div>
+<div id="map" class="map" style="width: 100%; height: 400px"></div>
+
+<!-- <div class="col-md-12 mt-3"></div> -->
+<div class="row">
+  <% if (products.length > 0) {%>
+  <div class="col-md-12 mb-3">
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+      <% for (let product of products) { %>
+      <div class="col">
+        <div class="card shadow-sm product-card">
+          <a href="/products/<%=product._id%>" style="text-decoration: none; color: #d4d4d4">
+            <div>
+              <% if(product.images.length) {%>
+
+              <img src="<%=product.images[0].url%>" class="bd-placeholder-img card-img-top" alt="" width="100%" max-height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
+
+              <% } else { %>
+              <img class="img-fluid" src="/images/placeholder.jpg" alt="" />
+
+              <% } %>
+            </div>
+          </a>
+
+          <div class="card-body">
+            <div class="row">
+              <!-- <div class="col-10  d-flex justify-content-between align-items-center">
+           
+                <small class="text-body-secondary d-flex"
+                ><div data-productCoordinates="<=product.location.coordinates %>" class="product-coordinates" style="cursor: pointer;"><i class="bi bi-geo-alt-fill" style="pointer-events: none;"></i></div>
+                <div class="distance-text mx-2">Calculating...</div></small
+              >
+                
+       
+            </div> -->
+
+              <div class="col-2 d-flex justify-content-end align-items-center d-none">
+                <div class="form-check text-secondary">
+                  <input class="form-check-input compare-checkbox d-none" type="checkbox" value="" id="product_<%=product._id%>" style="cursor: pointer" />
+                  <label class="form-check-label" for="product_<%=product._id%>" style="cursor: pointer">
+                    <i class="bi bi-intersect"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <% } else { %>
+  <div class="col-md-12">
+    <p class="text-center">No matching devices found. Please adjust your search criteria.</p>
+  </div>
+  <% } %>
+</div>

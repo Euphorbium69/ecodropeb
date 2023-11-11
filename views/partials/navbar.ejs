@@ -1,32 +1,53 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #5cbb43">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
+<!-- <- include('./iconsSVG') %> -->
+
+<header class="sticky-top text-body">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg flex-row-reverse">
+      <div class="d-flex">
+        <% if (!currentUser) { %>
+
+        <!-- Define the behavior when user is not logged in -->
+        <button type="button" onclick="location.href='/auth/login'" class="btn btn-sm btn-outline-light me-2">Log in</button>
+        <button type="button" onclick="location.href='/auth/register'" class="btn btn-sm btn-warning">Sign up</button>
+        <% } else { %>
+
+        <!-- Define the behavior when user is logged in -->
+        <p class="my-0 mx-3 d-flex text-white" style="text-transform: capitalize">Hello, <%= currentUser.firstName %>!</p>
+        <a href="/auth/logout" class="me-2 mb-md-0 text-decoration-none lh-1 d-flex align-items-center text-white">
+          <i class="bi bi-box-arrow-right"></i>
+        </a>
+        <% } %>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link text-white" href="/">Home</a>
+          <a class="nav-link text-white" href="/products">Products</a>
+          <a class="nav-link text-white" href="/products/new">Dispose</a>
+          <a class="nav-link text-white" href="/about">About Recycling</a>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>
+<script>
+  // Get the current URL path
+  var path = window.location.pathname;
+
+  // Get all the navigation links
+  var navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+  // Loop through each navigation link
+  navLinks.forEach(function (link) {
+    // Check if the link's href matches the current path
+    if (link.getAttribute('href') === path) {
+      // Add the active class to the matching link
+      link.classList.add('active');
+      //link.classList.add('text-decoration-underline');
+    }
+  });
+</script>
