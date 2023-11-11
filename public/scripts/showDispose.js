@@ -11,115 +11,185 @@ var markersOnTheMap = {};
 var eventListenersAdded = false;
 var points = [
   {
-    coordinates: [-0.13389631465156526, 51.510387047712356],
+    coordinates: [24.9384, 60.17],
     properties: {
       id: 1,
-      name: 'Checkpoint A',
+      name: 'ElectroTech Solutions',
     },
   },
   {
-    coordinates: [-0.11281231063600217, 51.51807866942707],
+    coordinates: [25.7512, 61.9255],
     properties: {
       id: 2,
-      name: 'Checkpoint B',
+      name: 'GadgetHub Innovations',
     },
   },
   {
-    coordinates: [0.04410606135789408, 51.60606293106869],
+    coordinates: [27.668, 62.8395],
     properties: {
       id: 3,
-      name: 'Checkpoint C',
+      name: 'EcoElectronics Services',
     },
   },
   {
-    coordinates: [0.06813865412814835, 51.6009452260123],
+    coordinates: [25.475, 65.015],
     properties: {
       id: 4,
-      name: 'Checkpoint D',
+      name: 'TechRecycle Depot',
     },
   },
   {
-    coordinates: [0.05028587092436965, 51.596253489653066],
+    coordinates: [23.785, 63.445],
     properties: {
       id: 5,
-      name: 'Checkpoint E',
+      name: 'GreenDevice Solutions',
     },
   },
   {
-    coordinates: [0.026939923659398346, 51.59412072198555],
+    coordinates: [27.325, 64.95],
     properties: {
       id: 6,
-      name: 'Checkpoint F',
+      name: 'NordicTech Recyclers',
     },
   },
   {
-    coordinates: [0.04822593439902789, 51.58729519243778],
+    coordinates: [28.1875, 61.07],
     properties: {
       id: 7,
-      name: 'Checkpoint G',
+      name: 'EcoInnovate Electronics',
     },
   },
   {
-    coordinates: [0.0598989080363026, 51.58516200412868],
+    coordinates: [22.271, 60.453],
     properties: {
       id: 8,
-      name: 'Checkpoint H',
+      name: 'SustainableGadgets',
     },
   },
   {
-    coordinates: [-0.1484370070708394, 51.51355434335747],
+    coordinates: [22.708, 63.728],
     properties: {
       id: 9,
-      name: 'Checkpoint I',
+      name: 'EcoCycle Electronics',
     },
   },
   {
-    coordinates: [-0.14116666086630403, 51.516268992925035],
+    coordinates: [26.035, 64.19],
     properties: {
       id: 10,
-      name: 'Checkpoint J',
+      name: 'SmartRecycle Solutions',
     },
   },
   {
-    coordinates: [-0.14698293783399663, 51.50857706561709],
+    coordinates: [23.763, 61.5],
     properties: {
       id: 11,
-      name: 'Checkpoint K',
+      name: 'FutureGadget Innovations',
     },
   },
   {
-    coordinates: [-0.1389855570008649, 51.512649424212185],
+    coordinates: [23.12, 63.843],
     properties: {
       id: 12,
-      name: 'Checkpoint L',
+      name: 'GreenDevice Recyclers',
     },
   },
   {
-    coordinates: [-0.1484370070708394, 51.51581656256633],
+    coordinates: [26.931, 60.917],
     properties: {
       id: 13,
-      name: 'Checkpoint M',
+      name: 'TechCycle Solutions',
     },
   },
   {
-    coordinates: [-0.1542532840487354, 51.51400679618595],
+    coordinates: [21.617, 63.0705],
     properties: {
       id: 14,
-      name: 'Checkpoint N',
+      name: 'EcoTech Recyclers',
     },
   },
   {
-    coordinates: [-0.17024804570488072, 51.516268992925035],
+    coordinates: [24.1485, 65.8435],
     properties: {
       id: 15,
-      name: 'Checkpoint O',
+      name: 'NordicRecycle Innovations',
     },
   },
   {
-    coordinates: [-0.16006956101645642, 51.50857706561709],
+    coordinates: [28.0225, 61.8555],
     properties: {
       id: 16,
-      name: 'Checkpoint P',
+      name: 'GreenGadget Solutions',
+    },
+  },
+  {
+    coordinates: [25.056, 60.273],
+    properties: {
+      id: 17,
+      name: 'EcoTech Innovations',
+    },
+  },
+  {
+    coordinates: [22.5735, 62.891],
+    properties: {
+      id: 18,
+      name: 'NordicRecycle Electronics',
+    },
+  },
+  {
+    coordinates: [24.495, 63.731],
+    properties: {
+      id: 19,
+      name: 'SustainableGadget Solutions',
+    },
+  },
+  {
+    coordinates: [27.7325, 66.503],
+    properties: {
+      id: 20,
+      name: 'TechCycle Innovations',
+    },
+  },
+  {
+    coordinates: [25.0557, 60.2722],
+    properties: {
+      id: 21,
+      name: 'GreenDevice Recyclers',
+    },
+  },
+  {
+    coordinates: [23.7609, 61.4978],
+    properties: {
+      id: 22,
+      name: 'EcoInnovate Electronics',
+    },
+  },
+  {
+    coordinates: [21.615, 63.068],
+    properties: {
+      id: 23,
+      name: 'NordicTech Solutions',
+    },
+  },
+  {
+    coordinates: [24.1466, 65.8412],
+    properties: {
+      id: 24,
+      name: 'TechRecycle Innovations',
+    },
+  },
+  {
+    coordinates: [28.0202, 61.853],
+    properties: {
+      id: 25,
+      name: 'EcoGadget Recyclers',
+    },
+  },
+  {
+    coordinates: [24.7935, 60.963],
+    properties: {
+      id: 26,
+      name: 'SustainableTech Solutions',
     },
   },
 ];
