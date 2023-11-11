@@ -295,7 +295,7 @@ if ('geolocation' in navigator) {
       map.addLayer({
         id: 'points',
         type: 'symbol',
-        source: 'points',z
+        source: 'points',
         layout: {
           'icon-image': 'pulsing-dot',
         },
