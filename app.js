@@ -78,8 +78,6 @@ passport.deserializeUser(User.deserializeUser());
 // Make currentUser, success, and error available in all templates
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  // res.locals.success = req.flash('success');
-  // res.locals.error = req.flash('error');
   next();
 });
 
@@ -90,6 +88,16 @@ app.use('/about', aboutRoutes);
 
 app.get('/', (req, res) => {
   res.render('home');
+});
+
+// Serve manifest.json
+app.get('/manifest.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'manifest.json'));
+});
+
+// Serve service-worker.js
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'service-worker.js'));
 });
 
 const port = process.env.PORT || 3000;

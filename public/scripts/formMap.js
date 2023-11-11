@@ -7,8 +7,6 @@ if ('geolocation' in navigator) {
     // Get user position
     userLat = position.coords.latitude;
     userLng = position.coords.longitude;
-    // console.log('userLat', userLat);
-    // console.log('userLng', userLng);
 
     let map = tt.map({
       key: TOMTOMTOKEN,

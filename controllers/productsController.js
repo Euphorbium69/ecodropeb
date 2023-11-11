@@ -50,9 +50,6 @@ module.exports.index = async (req, res) => {
     const totalPages = Math.ceil(totalProducts / limitPerPage);
     // Render response with pagination data
 
-    /////////////////////////////////////
-    ////////////////////////////////////////
-    //const products = await Product.find({});
     res.render('products/index', { products, currentPage, limitPerPage, totalProducts, totalPages, startIndex, deviceStatus, deviceType });
   } catch (err) {
     console.error(err.message);
@@ -60,16 +57,12 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.renderNewForm = (req, res) => {
-  const myform = 'myform';
-  res.render('products/new', {
-    myform,
-  });
+  res.render('products/new');
 };
 
 module.exports.createProduct = async (req, res, next) => {
   try {
     if (req.body.product.latitude === null || req.body.product.longitude === null || req.body.product.latitude === '' || req.body.product.longitude === '' || isNaN(req.body.product.latitude) || isNaN(req.body.product.longitude)) {
-      // req.flash('error', 'Please enable geolocation to provide accurate location.');
       return res.redirect('/products/new');
     }
 
@@ -128,8 +121,6 @@ module.exports.showProduct = async (req, res) => {
 // Delete product
 module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   await Product.findByIdAndDelete(id);
-  // req.flash('success', 'Successfully deleted product');
   res.status(200).redirect('/products');
 };

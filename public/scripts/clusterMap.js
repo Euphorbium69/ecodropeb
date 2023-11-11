@@ -5,13 +5,10 @@ var map = tt.map({
   zoom: 6,
   // dragPan: !isMobileOrTablet()
 });
-// riga [24.105078, 56.946285],
 
-// Set coordinates which cover the Baltic States and some surrounding areas
+// Set coordinates which cover the Europe and some surrounding areas
 var southwest = new tt.LngLat(-25, 35); // Adjust as needed
 var northeast = new tt.LngLat(45, 70);
-// var southwest = new tt.LngLat(18.059, 52.129);
-// var northeast = new tt.LngLat(30.425, 61.259);
 var bounds = new tt.LngLatBounds(southwest, northeast);
 
 map.on('load', function () {
@@ -24,41 +21,14 @@ map.addControl(new tt.NavigationControl());
 var markersOnTheMap = {};
 var eventListenersAdded = false;
 
-//console.log(products);
-//console.log(selectedPolygonCoordinates.features);
-// map.on('load', function () {
-//   map.addLayer({
-//     id: 'overlay',
-//     type: 'fill',
-//     source: {
-//       type: 'geojson',
-//       data: {
-//         type: 'Feature',
-//         geometry: {
-//           type: 'Polygon',
-//           coordinates: [selectedPolygonCoordinates.features],
-//         },
-//       },
-//     },
-//     layout: {},
-//     paint: {
-//       'fill-color': '#8A2BE2',
-//       'fill-opacity': 0.5,
-//       'fill-outline-color': '#4B0082',
-//     },
-//   });
-// });
-//console.log(products);
 var points = products.features.map(function (point, index) {
-  //console.log(point.location.coordinates);
   return {
     coordinates: [point.location.coordinates[0], point.location.coordinates[1]],
 
-    // properties: { id: index, name: `Point ${index}` },
     properties: {
       id: index,
       name: point.deviceType,
-      img: point.images.length > 0 ? point.images[0].url : 'images/placeholder.jpg',
+      img: point.images.length > 0 ? point.images[0].url : 'images/icons/battery.jpg',
       productId: point._id,
     },
   };
@@ -89,11 +59,6 @@ productCoordinatesAll.forEach((item) => {
       behavior: 'smooth', // Add smooth scrolling animation
     });
 
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth', // Add smooth scrolling animation
-    // });
-
     const productCoordinates = e.target.getAttribute('data-productCoordinates');
     const coordinatesArrayLngLat = productCoordinates.split(',');
 
@@ -114,13 +79,6 @@ function refreshMarkers() {
     if (feature.properties && !feature.properties.cluster) {
       var id = parseInt(feature.properties.id, 10);
       if (!markersOnTheMap[id]) {
-        // // Create a custom icon
-        // var markerIcon = new tt.Icon({
-        //   iconUrl: "images/paw.png",
-        //   iconSize: [50, 50], // size of the icon
-        //   iconAnchor: [25, 50], // position of the icon relative to its anchor point
-        // });
-        // function createMarker(icon, position, color, popupText) {
         var markerElement = document.createElement('div');
         markerElement.className = 'marker';
 
@@ -213,19 +171,6 @@ map.on('load', function () {
     },
   });
 
-  // map.addLayer({
-  //   id: "unclustered-point",
-  //   type: "circle",
-  //   source: "point-source",
-  //   filter: ["!has", "point_count"],
-  //   paint: {
-  //     "circle-color": "#11b4da",
-  //     "circle-radius": 4,
-  //     "circle-stroke-width": 1,
-  //     "circle-stroke-color": "#fff",
-  //   },
-  // });
-
   map.on('data', function (e) {
     if (e.sourceId !== 'point-source' || !map.getSource('point-source').loaded()) {
       return;
@@ -266,7 +211,7 @@ map.on('load', function () {
 
 ////////////////
 // DISPLAY YOUR LOCATION ANIMATED POINT
-// THIS CODES REMOVE ITEMS COUNT FROM CLUSTER - ITS A BUG
+
 if ('geolocation' in navigator) {
   // geolocation is available
   navigator.geolocation.getCurrentPosition((position) => {
@@ -276,7 +221,6 @@ if ('geolocation' in navigator) {
     var size = 200;
 
     // implementation of CustomLayer to draw animated location icon on the map
-    // see https://developer.tomtom.com/maps-sdk-web-js/documentation#ICustomLayer for more info
     var locationPoint = {
       width: size,
       height: size,
