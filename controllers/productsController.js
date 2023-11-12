@@ -57,7 +57,6 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.renderNewForm = (req, res) => {
-  console.log("test");
   res.render('products/new');
 };
 
