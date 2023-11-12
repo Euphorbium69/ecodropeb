@@ -115,16 +115,20 @@ function refreshMarkers() {
         newMarker.addTo(map);
         newMarker.setPopup(
           // new tt.Popup({ offset: 30 }).setText(feature.properties.name)
+
           new tt.Popup({ offset: 30, closeButton: false }).setHTML(
-            `<div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden;">
-                <a href='/products/${feature.properties.productId}'>
-                  <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid white;
-                  background-image: url(${feature.properties.img});
-                  background-size: cover;
-                  background-position: center;">
-                  </div>
-                </a>
-              </div>`,
+            `<div style="text-align: center; display:flex; flex-direction: column; align-items: center;justify-content: center;font-weight:700">
+            <div style="width: 120px; height: 120px; overflow: hidden;">
+            <a href='/products/${feature.properties.productId}'>
+              <div style="width: 120px; height: 120px; overflow: hidden; border: 3px solid white;
+              background-image: url(${feature.properties.img});
+              background-size: cover;
+              background-position: center;">
+              </div>
+            </a>
+          </div>
+          <p style="text-transform: uppercase;">${feature.properties.name}</p>
+          </div>`,
           ),
         );
 

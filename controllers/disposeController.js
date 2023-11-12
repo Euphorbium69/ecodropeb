@@ -1,10 +1,7 @@
-const Product = require('../models/product');
-
 module.exports.index = async (req, res) => {
   try {
-    const product = await Product.find();
     const disposePage = 'Dispose Page';
-    res.render('dispose/index', { product });
+    res.render('dispose/index', { disposePage });
   } catch (err) {
     console.error(err.message);
   }

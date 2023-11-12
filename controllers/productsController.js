@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 const fns = require('date-fns');
-const User = require('../models/user');
 const { ObjectId } = require('mongoose').Types;
 const path = require('path');
 

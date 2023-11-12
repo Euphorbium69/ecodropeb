@@ -1,7 +1,7 @@
 {
-  "name": "EcoDrop",
-  "short_name": "EcoDrop",
-  "description": "EcoDrop - A platform connecting users to exchange electronic devices sustainably, promoting reuse and reducing e-waste.",
+  "name": "Eco Drop",
+  "short_name": "Eco Drop",
+  "description": "Eco Drop - A platform connecting users to exchange electronic devices sustainably, promoting reuse and reducing e-waste.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#5CBB43",

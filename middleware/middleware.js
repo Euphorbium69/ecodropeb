@@ -1,5 +1,3 @@
-const ExpressError = require('../utils/ExpressError.js');
-const User = require('../models/user.js');
 const Product = require('../models/product.js');
 
 // Middleware function to check if user is authenticated
