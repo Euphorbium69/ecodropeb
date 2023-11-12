@@ -94,8 +94,6 @@ module.exports.createProduct = async (req, res, next) => {
     res.redirect(`/products/${product._id}`);
   } catch (err) {
     console.log(err);
-    res.status(500).render('error', { error: err }); // Customize this according to your templating engine
-
   }
 };
 
